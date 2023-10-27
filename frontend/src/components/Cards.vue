@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#b2a49b] h-44 rounded-xl shadow-xl flex items-center">
+  <div class="bg-[#b2a49b] h-44 rounded-xl shadow-lg flex items-center hover:scale-105 duration-300 cursor-pointer">
     <div class="">
       <BaseIcon :name="name" class="text-[whitesmoke] ml-6 w-32" />
     </div>
