@@ -18,7 +18,7 @@
       <div class="flex justify-end pt-2">
         <button
           type="submit"
-          class="text-whitesmoke bg-[#e40046] hover:bg-[#e40046] focus:ring-4 focus:outline-none focus:ring-[#e40046] font-semibold rounded-lg text-sm w-full sm:w-auto px-4 py-2.5 text-center mt-2"
+          class="text-whitesmoke bg-[#e40046] hover:bg-[#ce134b] focus:ring-4 focus:outline-none focus:ring-[#ce134b] font-semibold rounded-lg text-sm w-full sm:w-auto px-4 py-2.5 text-center mt-2"
         >
           Отправить файл
         </button>

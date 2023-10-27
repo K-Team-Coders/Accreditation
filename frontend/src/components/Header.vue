@@ -4,7 +4,7 @@
       class="bg-[#5b6777] flex xl:px-4 xl:py-3 py-2 px-2 justify-between h-24 shadow-xl"
     >
       <a
-        class="xl:text-4xl items-center flex text-lg my-auto font-corme ml-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300"
+        class="xl:text-3xl items-center flex text-lg my-auto font-rale ml-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300"
         href=""
       >
         <svg
@@ -25,13 +25,14 @@
             stroke-linejoin="round"
           />
         </svg>
-        Product accreditation
+        Product accreditation labotary
       </a>
       <a
-        class="xl:text-4xl items-center flex text-lg my-auto font-corme mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
+        class="xl:text-3xl items-center flex text-lg my-auto font-rale mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
         href="https://github.com/K-Team-Coders"
+        target="_blank"
       >
-        K-Team
+        from <span class="text-[#ada7a3] font-bold ml-4"> K-Team </span>
       </a>
     </nav>
   </header>

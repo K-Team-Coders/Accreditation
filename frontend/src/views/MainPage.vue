@@ -1,11 +1,22 @@
 <template>
   <body class="bg-white">
     <Header></Header>
-    <div class="my-20 flex justify-center">
-      <Form />
-    </div>
-    <div class="my-20 flex justify-center">
-      <FormsFile />
+    <div class="px-52">
+      <div class="my-20 flex justify-center">
+        <Form />
+      </div>
+      <div class="my-20 flex justify-center">
+        <FormsFile />
+      </div>
+      <div class="grid grid-cols-2 gap-2 mt-20 mb-4">
+        <Cards name="book" text="ГОСТ 12367-123" />
+        <Cards name="code" text="ТН ВЕД: 1746293568487" />
+        <Cards name="tech" text="Оборудование: станок некачественный" />
+        <Cards name="list" text="Группа продукции: набитый мясом холодильник" />
+      </div>
+      <div class="flex justify-center mb-6">
+        <DownloadButtonGost />
+      </div>
     </div>
     <Footer></Footer>
   </body>
@@ -16,9 +27,11 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import Form from "@/components/Form.vue";
 import FormsFile from "@/components/FormsFile.vue";
+import Cards from "@/components/Cards.vue";
+import DownloadButtonGost from "@/components/DownloadButtonGost.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: { Header, Footer, Form, FormsFile },
+  components: { Header, Footer, Form, FormsFile, Cards, DownloadButtonGost },
   data() {
     return {
       choosed_uav: "",

@@ -12,7 +12,7 @@
           aria-label="Full name"
         />
         <button
-          class="flex-shrink-0 bg-[#e40046] hover:bg-[#e40046] border-[#e40046] hover:border-[#e40046] text-sm border-4 text-whitesmoke font-semibold py-1 px-4 rounded-lg"
+          class="flex-shrink-0 bg-[#e40046] hover:bg-[#ce134b] border-[#e40046] hover:border-[#ce134b] text-sm border-4 text-whitesmoke font-semibold py-1 px-4 rounded-lg"
           type="button"
         >
           Отправить
