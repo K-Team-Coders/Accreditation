@@ -1,32 +1,37 @@
 <template>
   <body class="bg-whitesmoke">
     <Header></Header>
-    <div class="px-52">
-      <div class="mt-20 flex justify-center">
-        <FormsFile />
+    <div class="flex">
+      <div class="px-36 pt-10 shadow-lg w-9/12">
+        <div class="flex justify-center">
+          <FormsFile />
+        </div>
+        <div class="mt-4">
+          <TableSite />
+        </div>
+        <div class="mt-16 flex justify-center">
+          <Form />
+        </div>
+        <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
+          <Cards name="book" text="12367-123" title="ГОСТ: " />
+          <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
+          <Cards
+            name="tech"
+            text="станок некачественный"
+            title="Оборудование: "
+          />
+          <Cards
+            name="list"
+            text="набитый мясом холодильник"
+            title="Группа продукции: "
+          />
+        </div>
+        <div class="flex justify-center mb-6">
+          <DownloadButtonGost />
+        </div>
       </div>
-      <div class="mt-4">
-        <TableSite />
-      </div>
-      <div class="mt-20 flex justify-center">
-        <Form />
-      </div>
-      <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
-        <Cards name="book" text="12367-123" title="ГОСТ: " />
-        <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
-        <Cards
-          name="tech"
-          text="станок некачественный"
-          title="Оборудование: "
-        />
-        <Cards
-          name="list"
-          text="набитый мясом холодильник"
-          title="Группа продукции: "
-        />
-      </div>
-      <div class="flex justify-center mb-6">
-        <DownloadButtonGost />
+      <div class="w-3/12 flex">
+        <RightAside />
       </div>
     </div>
     <Footer></Footer>
@@ -42,6 +47,7 @@ import Cards from "@/components/Cards.vue";
 import DownloadButtonGost from "@/components/DownloadButtonGost.vue";
 import TableSite from "@/components/TableSite.vue";
 import { mapActions, mapGetters } from "vuex";
+import RightAside from "@/components/RightAside.vue";
 export default {
   components: {
     Header,
@@ -51,6 +57,7 @@ export default {
     Cards,
     DownloadButtonGost,
     TableSite,
+    RightAside,
   },
   data() {
     return {
