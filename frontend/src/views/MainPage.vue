@@ -1,14 +1,17 @@
 <template>
-  <body class="bg-white">
+  <body class="bg-whitesmoke">
     <Header></Header>
     <div class="px-52">
-      <div class="my-20 flex justify-center">
-        <Form />
-      </div>
-      <div class="my-20 flex justify-center">
+      <div class="mt-20 flex justify-center">
         <FormsFile />
       </div>
-      <div class="grid grid-cols-2 gap-2 mt-20 mb-4">
+      <div class="mt-4">
+        <TableSite />
+      </div>
+      <div class="mt-20 flex justify-center">
+        <Form />
+      </div>
+      <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
         <Cards name="book" text="12367-123" title="ГОСТ: " />
         <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
         <Cards
@@ -24,9 +27,6 @@
       </div>
       <div class="flex justify-center mb-6">
         <DownloadButtonGost />
-      </div>
-      <div class="pb-4">
-        <TableSite />
       </div>
     </div>
     <Footer></Footer>
