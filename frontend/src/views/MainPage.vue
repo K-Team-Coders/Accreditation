@@ -9,13 +9,24 @@
         <FormsFile />
       </div>
       <div class="grid grid-cols-2 gap-2 mt-20 mb-4">
-        <Cards name="book" text="12367-123" title="ГОСТ: "/>
-        <Cards name="code" text="1746293568487" title="ТН ВЕД: "/>
-        <Cards name="tech" text="станок некачественный" title="Оборудование: "/>
-        <Cards name="list" text="набитый мясом холодильник" title="Группа продукции: "/>
+        <Cards name="book" text="12367-123" title="ГОСТ: " />
+        <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
+        <Cards
+          name="tech"
+          text="станок некачественный"
+          title="Оборудование: "
+        />
+        <Cards
+          name="list"
+          text="набитый мясом холодильник"
+          title="Группа продукции: "
+        />
       </div>
       <div class="flex justify-center mb-6">
         <DownloadButtonGost />
+      </div>
+      <div class="pb-4">
+        <TableSite />
       </div>
     </div>
     <Footer></Footer>
@@ -29,9 +40,18 @@ import Form from "@/components/Form.vue";
 import FormsFile from "@/components/FormsFile.vue";
 import Cards from "@/components/Cards.vue";
 import DownloadButtonGost from "@/components/DownloadButtonGost.vue";
+import TableSite from "@/components/TableSite.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  components: { Header, Footer, Form, FormsFile, Cards, DownloadButtonGost },
+  components: {
+    Header,
+    Footer,
+    Form,
+    FormsFile,
+    Cards,
+    DownloadButtonGost,
+    TableSite,
+  },
   data() {
     return {
       choosed_uav: "",
