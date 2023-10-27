@@ -1,45 +1,38 @@
 <template>
   <header>
-    <nav class="border-b border-red-700 ">
-      <div class="flex justify-between items-center xl:px-4 xl:py-3 py-2 px-2">
-        <div class="xl:ml-10 ml-3 sm:ml-7 flex flex-row gap-2.5 font-mono items-center justify-center text-whitesmoke">
-          <a class="hover:text-yellow-500 font-mono"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"
-              />
-            </svg>
-          </a>
-          <a class="xl:text-2xl text-lg font-rale hover:text-red-500" href=""> WARMONGER:CRAWLER</a>
-        </div>
-        <div class="xl:mr-10 xl:text-xl text-base mr-2">
-          <ul class="flex flex-row xl:space-x-8 sm:space-x-4 sm:mr-6 space-x-2">
-            <li>
-              <a
-                href="#"
-                class="text-red-500 font-monster hover:text-red-700"
-                >Обзор БПЛА разных стран</a
-              >
-            </li>
-            <li>
-              <a
-                href="#/drone_table"
-                class="text-whitesmoke font-monster hover:text-gray-400 "
-                >База данных малых БПЛА</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+    <nav
+      class="bg-[#5b6777] flex xl:px-4 xl:py-3 py-2 px-2 justify-between h-24 shadow-xl"
+    >
+      <a
+        class="xl:text-4xl items-center flex text-lg my-auto font-corme ml-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300"
+        href=""
+      >
+        <svg
+          class="h-14 mr-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.39254 16.2614C2.64803 13.1941 1.66074 9.71783 1.51646 6.15051C1.50127 5.77507 1.70918 5.42812 2.04153 5.25282L11.5335 0.246091C11.8254 0.0920859 12.1746 0.0920859 12.4665 0.246091L21.9585 5.25282C22.2908 5.42812 22.4987 5.77507 22.4835 6.15051C22.3393 9.71783 21.352 13.1941 19.6075 16.2614C17.8618 19.3307 15.4169 21.8869 12.4986 23.7001C12.1931 23.8899 11.8069 23.8899 11.5014 23.7001C8.58313 21.8869 6.13817 19.3307 4.39254 16.2614Z"
+            fill="#e40046"
+          />
+          <path
+            d="M8.25 12.75L11.25 15L17.25 9"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Product accreditation
+      </a>
+      <a
+        class="xl:text-4xl items-center flex text-lg my-auto font-corme mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
+        href="https://github.com/K-Team-Coders"
+      >
+        K-Team
+      </a>
     </nav>
   </header>
 </template>
