@@ -3,17 +3,18 @@
     <div class="">
       <BaseIcon :name="name" class="text-[whitesmoke] ml-6 w-32" />
     </div>
-    <p
-      class="mx-4 my-4 text-whitesmoke font-roboto xl:text-xl text-sm font-semibold text-left"
+    <div
+      class="mx-4 my-4 text-whitesmoke font-roboto xl:text-xl text-sm font-semibold text-left items-end"
     >
-      {{ text }}
-    </p>
+      <span class="text-[#e40046] text-start text-2xl">{{ title }}</span>
+      <span class="text-whitesmoke text-2xl ml-1">{{ text }}</span>
+    </div>
   </div>
 </template>
 <script>
 import BaseIcon from "./BaseIcon.vue";
 export default {
   components: { BaseIcon },
-  props: ["name", "text"],
+  props: ["name", "text", "title"],
 };
 </script>

@@ -9,10 +9,10 @@
         <FormsFile />
       </div>
       <div class="grid grid-cols-2 gap-2 mt-20 mb-4">
-        <Cards name="book" text="ГОСТ 12367-123" />
-        <Cards name="code" text="ТН ВЕД: 1746293568487" />
-        <Cards name="tech" text="Оборудование: станок некачественный" />
-        <Cards name="list" text="Группа продукции: набитый мясом холодильник" />
+        <Cards name="book" text="12367-123" title="ГОСТ: "/>
+        <Cards name="code" text="1746293568487" title="ТН ВЕД: "/>
+        <Cards name="tech" text="станок некачественный" title="Оборудование: "/>
+        <Cards name="list" text="набитый мясом холодильник" title="Группа продукции: "/>
       </div>
       <div class="flex justify-center mb-6">
         <DownloadButtonGost />
