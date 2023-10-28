@@ -1,14 +1,14 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center xl:items-center px-4 xl:px-0">
     <div
-      class="bg-gray-50 2xl:max-w-4xl xl:max-w-3xl lg:max-w-2xl md:max-w-2xl sm:max-w-xl max-w-[320px] p-4 w-full px-4 py-3 rounded-lg shadow-md"
+      class="bg-gray-50 w-full px-4 py-3 rounded-lg shadow-md"
     >
       <form class="">
         <div class="flex items-center border-b border-[#e40046] py-2">
           <input
             v-model="text"
             @input="text_processing()"
-            class="appearance-none bg-transparent border-none w-full text-gray-700 font-semibold mr-3 py-1 px-2 leading-tight focus:outline-none"
+            class="appearance-none bg-transparent border-none w-full text-gray-700 font-semibold mr-3 xl:py-1 px-2 leading-tight focus:outline-none"
             type="text"
             placeholder="Введите наименование продукта"
             aria-label="Full name"
@@ -16,9 +16,9 @@
         </div>
       </form>
     </div>
-    <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
-      <Cards name="book" text="12367-123" title="ГОСТ: " />
-      <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
+    <div class="grid xl:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2 grod-cols-1 gap-2 mt-10 mb-4">
+      <Cards name="book" text="12367123" title="ГОСТ: " />
+      <Cards name="code" text="17462935684123123123123123123123123фвфыпвгфнпвлфыивплфыгивлфыилывилфыивго 87" title="ТН ВЕД: " />
       <Cards name="tech" text="Текст" title="Оборудование: " />
       <Cards name="list" text="Текст" title="Группа продукции: " />
     </div>

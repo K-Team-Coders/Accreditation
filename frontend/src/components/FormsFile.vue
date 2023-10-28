@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center px-4 xl:px-0">
     <div
-      class="bg-gray-50 2xl:max-w-4xl xl:max-w-3xl lg:max-w-2xl md:max-w-2xl sm:max-w-xl max-w-[320px] p-4 w-full px-4 py-3 rounded-lg shadow-md"
+      class="bg-gray-50 2xl:max-w-4xl xl:max-w-3xl lg:max-w-2xl md:max-w-2xl sm:max-w-xl p-4 w-full px-4 py-3 rounded-lg shadow-md"
     >
       <form>
         <div class="flex items-center py-2">
@@ -28,9 +28,9 @@
         </div>
       </form>
     </div>
-    <div class="pt-5 pb-16">
-      <TableSite />
-    </div>
+  </div>
+  <div class="pt-5 pb-16 overflow-x-auto">
+    <TableSite />
   </div>
 </template>
 

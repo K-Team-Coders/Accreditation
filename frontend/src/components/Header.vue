@@ -4,7 +4,7 @@
       class="bg-[#5b6777] flex xl:px-4 xl:py-3 py-1 px-1 justify-between h-24 shadow-xl"
     >
       <a
-        class="xl:text-3xl items-center flex text-lg my-auto ml-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300"
+        class="xl:text-3xl items-center flex lg:text-2xl md:text-lg my-auto xl:ml-8 ml-4 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 leading-5 text-sm"
         href=""
       >
         <svg
@@ -28,11 +28,11 @@
         Лаборатория аккредитации "ТОЛМАС"
       </a>
       <a
-        class="xl:text-3xl items-center flex text-lg my-auto mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
+        class="xl:text-3xl items-center flex lg:text-2xl md:text-lg text-sm my-auto xl:mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
         href="https://github.com/K-Team-Coders"
         target="_blank"
       >
-         <span class="text-[#ffffff] hover:text-red-400 font-bold ml-4"> K-Team </span>
+         <span class="text-[#ffffff] hover:text-red-400 font-bold ml-4 w-20 xl:w-32 lg:w-32 xl:mr-4"> K-Team </span>
       </a>
     </nav>
   </header>

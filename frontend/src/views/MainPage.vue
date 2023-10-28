@@ -2,14 +2,14 @@
   <body class="bg-whitesmoke font-rale">
     <Header></Header>
     <div class="">
-      <div class="px-36 pt-4 shadow-lg">
+      <div class="xl:px-28 pt-4 shadow-lg">
         <div>
           <LogoTurik />
         </div>
-        <div class="flex justify-center pt-5">
+        <div class="pt-5">
           <FormsFile />
         </div>
-        <div class="pt-10 flex justify-center border-t-2 border-[#e40046]">
+        <div class="pt-10 border-t-2 border-[#e40046]">
           <Form />
         </div>
         <div class="flex flex-col border-t-2 border-[#e40046] pt-4">

@@ -1,13 +1,17 @@
 <template>
-  <div class="bg-[#b2a49b] h-44 rounded-xl shadow-md flex items-center hover:scale-105  hover:shadow-2xl duration-300 cursor-pointer">
-    <div class="">
-      <BaseIcon :name="name" class="text-[whitesmoke] ml-6 w-32" />
+  <div
+    class="bg-[#b2a49b] xl:h-auto 2xl:w-full rounded-xl shadow-md flex items-center hover:scale-105 hover:shadow-2xl duration-300 cursor-pointer flex-col py-4 xl:pt-0"
+  >
+    <div class="flex">
+      <BaseIcon :name="name" class="text-whitesmoke w-20" />
     </div>
-    <div
-      class="mx-4 my-4 text-whitesmoke xl:text-xl text-sm font-semibold text-left items-end"
-    >
-      <span class="text-[#e40046] text-start text-2xl">{{ title }}</span>
-      <span class="text-whitesmoke text-2xl ml-1 font-roboto">{{ text }}</span>
+    <div class="mx-4 pt-2 text-whitesmoke text-base font-semibold">
+      <span class="text-[#e40046] text-start font-bold 2xl:text-2xl">{{
+        title
+      }}</span>
+      <span class="text-whitesmoke xl:ml-1 2xl:text-2xl font-roboto break-all">{{
+        text
+      }}</span>
     </div>
   </div>
 </template>
