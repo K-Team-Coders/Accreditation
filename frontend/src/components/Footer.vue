@@ -6,7 +6,7 @@
           href="https://github.com/K-Team-Coders/Warmonger"
           target="_blank"
           type="button"
-          class="rounded-lg bg-[#b2a49b] text-whitesmoke leading-normal uppercase hover:bg-[#e40046] hover:text-whitesmoke focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-44 h-12 m-6"
+          class="rounded-lg hover:bg-[#e40044cc] text-whitesmoke leading-normal uppercase bg-[#e40046] hover:text-whitesmoke focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-44 h-12 m-6"
         >
           <svg
             aria-hidden="true"
