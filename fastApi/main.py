@@ -1,7 +1,9 @@
 import os
+import re
 import time
 import json
 import docx
+import joblib
 
 import shutil
 import psycopg2
@@ -16,6 +18,7 @@ import nltk
 from nltk.corpus import stopwords
 from pymystem3 import Mystem
 from string import punctuation
+from gensim.models import KeyedVectors
 
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, Request, UploadFile, Response
@@ -27,6 +30,22 @@ from sklearn.metrics.pairwise import linear_kernel,cosine_similarity
 
 nltk.download('stopwords')
 
+# load labels list
+labels = 0
+labels_path = Path().cwd().joinpath('names').joinpath('lables.json')
+with open(labels_path, 'rb') as f:
+    labels = json.load(f)
+labels = labels['data']
+
+# Load the model clf
+clf_path = Path().cwd().joinpath('names').joinpath('models').joinpath('svm_model.pkl')
+clf = joblib.load(clf_path.__str__())
+
+# Load the KeyedVectors model
+word2vec_model_path = Path().cwd().joinpath('names').joinpath('models').joinpath('word2vec_model.model')
+word2vec_model = KeyedVectors.load(word2vec_model_path.__str__())
+
+# Load info about GOSTS
 standars_info_path = Path().cwd().joinpath('gosts').joinpath('standarts.csv')
 standars_info = pd.read_csv(standars_info_path)
 
@@ -42,6 +61,22 @@ mystem = Mystem()
 russian_stopwords = stopwords.words("russian")
 nltk.download("stopwords")
 
+# Стандартная функция обработки естественного языка
+def clean_text(text):
+    text = re.sub(r"[^а-яА-Я\s]", "", text)  # Remove all characters except letters and spaces
+    text = text.lower()  # Convert text to lowercase
+    text = text.split()  # Split the text into words
+    return text
+
+# Предсказание класса для подзадачи НАИМЕНОВАНИЕ - НАГДРУППА ПРОДУКЦИИ
+def predict_class(input_text):
+    cleaned_text = clean_text(input_text)
+    vector = np.mean([word2vec_model[word] for word in cleaned_text if word in word2vec_model], axis=0)
+    predicted_class = clf.predict([vector])
+    return predicted_class[0]
+
+
+# Функция для метрики обоснованности выбора по каждому из оборудований
 def compute_similarity_precentages(sentences1, sentences2):
     all_sentences = sentences1 + sentences2
     tfidf_vectorizer = CountVectorizer(ngram_range=(1, 2))
@@ -54,6 +89,7 @@ def compute_similarity_precentages(sentences1, sentences2):
 
     return similarity_percentages 
 
+# Метрика общей схожести всего оборудования с ГОСТами
 def calculate_similarity_score(list1, list2):
     tfidf_vectorizer = CountVectorizer(ngram_range=(1, 2))
 
@@ -64,6 +100,7 @@ def calculate_similarity_score(list1, list2):
 
     return(np.mean(cosine_similarities))
 
+# Вспомогательная функция для текстовой обработки
 def preprocess_text(text):
     tokens = mystem.lemmatize(text.lower())
     tokens = [token for token in tokens if token not in russian_stopwords\
@@ -74,6 +111,7 @@ def preprocess_text(text):
     
     return text
 
+# Функция для реализации работы соотвествия ГОСТОв и оборудования в них
 def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
     tfidf_vectorizer = TfidfVectorizer(ngram_range=(1, 2))
 
@@ -99,6 +137,8 @@ def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
         # logger.debug(f"Сходство (TF-IDF): {similarity}")
         # logger.debug("---------")
     return set(list_values)
+
+# Далее идет инициализация Backend-части + работы с БД
 
 PRODUCTION = False
 
@@ -164,8 +204,12 @@ app.add_middleware(
 def root():
     return {"message": "Hello World"}
 
+
 @app.get("/allGosts")
 async def getAllGosts():
+    """
+    Вывод названий отработанных ГОСТов
+    """
     cur.execute("SELECT * FROM gosts")
     data = cur.fetchall()
     
@@ -179,6 +223,9 @@ async def getAllGosts():
 
 @app.post("/get_pred")
 async def upload_folder_get_pred(request: Request,  file: UploadFile = File(...)):
+    """
+    Функция для выявления оборудования согласно поданному файлу ГОСТа (внимание, здесь используется multipart-formdata!)
+    """
     # Get the folder name from the request parameter
     path_to_save=Path.cwd().joinpath('download').joinpath(file.filename)
     with open(path_to_save, "wb") as dest_file:
@@ -196,6 +243,9 @@ async def upload_folder_get_pred(request: Request,  file: UploadFile = File(...)
 
 @app.post("/check_dataset")
 async def upload_dataset(request: Request, file: UploadFile = File(...)):
+    """
+    Функция для загрузки датасета и проверки его в нашем ПК
+    """
     path_to_save = Path.cwd().joinpath('datacheck').joinpath(file.filename)
 
     with open(path_to_save, "wb") as dest_file:
@@ -219,7 +269,7 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
 
     # Open via pandas
     df = pd.read_csv(path_to_save)
-    for row in df[:5].iterrows():
+    for row in df.iterrows():
         index = row[1][0] # index
         gost = row[1][1] # GOSTS
         group = row[1][2] # Group
@@ -255,19 +305,14 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
                     find_gosts.append(subdata["name"].replace('\xa0', ' '))
                     find_equipment.extend(subdata["equip"].split(';;'))
         
-        # Метрики !
+        similarity_score = 0
 
-        # Сумма по элементам
-        # Обородувание из ГОСТА -- list(prediction)
-        # Оборудование из Датасета -- [item for item in item['Техническое оборудование'].split(";") ]
-        # Вернет лист эталонных с пользовательскими чем больше, тем чаще повторяется
-        similarity_percentages = compute_similarity_precentages(find_equipment, equip.split(';'))
-        similarity_percentages_len = len(similarity_percentages)
-        similarity_percentages = sum([x / similarity_percentages_len for x in similarity_percentages]) 
-        
-        # Обший процент
-        similarity_score = calculate_similarity_score(find_equipment, equip.split(';'))
-        
+        try:
+            # Обший процент
+            similarity_score = calculate_similarity_score(find_equipment, equip.split(';'))
+        except Exception as e:
+            logger.error(e)
+
         result.append(
             {
                 "id": index,
@@ -287,6 +332,9 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
 
 @app.post("/train")
 async def train_upload_dataset(request: Request, file: UploadFile = File(...)):
+    """
+    Функция для отработки всех данных
+    """
     database = Path.cwd().joinpath('download')
     path_to_save = database.joinpath(file.filename)
 
@@ -321,3 +369,83 @@ async def train_upload_dataset(request: Request, file: UploadFile = File(...)):
 
     return Response(status_code=200)
 
+
+@app.post("/predict")
+async def predictByName(name: str):
+    """
+    Функция для определения оборудования в соответсвии с названием (определяет группу продукции, далее госты, далее необзодимое оборудование)
+
+    ДЛЯ РАБОТЫ НЕОБХОДИМО РАСПАКОВАТЬ ПАПКУ models в путь fastApi/names/
+
+    https://disk.yandex.ru/d/kzPozoBRsiJLgQ
+    """
+    # Example of using the function
+    input_text = "Блузка"
+    predicted_class = predict_class(input_text)
+
+    labels_keys = list(labels.keys())
+    labels_values = list(labels.values()) 
+
+    group = None
+    for index in range(len(labels_values)):
+        if labels_values[index] == predicted_class:
+            group = labels_keys[index]
+
+                
+            cur.execute("SELECT * FROM gosts;")
+            data = cur.fetchall()
+
+            total_gost_data = []
+            for index, subdata in enumerate(data):
+                # logger.debug(subdata[0]) # id
+                # logger.debug(subdata[1]) # name
+                # logger.debug(subdata[2]) # equip
+
+                total_gost_data.append({
+                    "name" : subdata[1],
+                    "equip": subdata[2]
+                })
+
+            # Решение как в первой подзадаче
+            uppergroup_on_current_group = []
+
+            # try to find in uppergroups
+            for uppergroup in gost_compare:
+                key = list(uppergroup.keys())[0]
+                values = list(uppergroup.values())[0]
+
+                if group in values:
+                    uppergroup_on_current_group.append(key)
+
+            # try to find gost on uppergroups 
+            uppergroup_gosts = [] 
+            for subgroup in uppergroup_on_current_group:
+                subgroup_gosts = standars_info[standars_info["Группа продукции"] == subgroup]["Обозначение и наименование стандарта"].to_list()
+                uppergroup_gosts.extend(subgroup_gosts)
+            uppergroup_gosts = list(set(uppergroup_gosts))
+
+            # check with our table && compare search result to validate equipment
+            find_gosts = []
+            find_equipment = []
+
+            # if find groups
+            if uppergroup_gosts:
+                for subdata in total_gost_data:
+                    if subdata["name"].replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') in [x.replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') for x in uppergroup_gosts]:
+                        find_gosts.append(subdata["name"].replace('\xa0', ' '))
+                        find_equipment.extend(subdata["equip"].split(';;'))
+
+            find_gosts = list(set(find_gosts))
+            find_equipment = list(set(find_equipment))
+
+            return JSONResponse(
+                status_code = 200, 
+                content = {
+                    "name": name,
+                    "group": group,
+                    "find_gosts": find_gosts,
+                    "find_equipment": find_equipment
+                }
+            )
+        
+    return Response(status_code=422)
