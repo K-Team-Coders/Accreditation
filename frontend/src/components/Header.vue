@@ -32,7 +32,7 @@
         href="https://github.com/K-Team-Coders"
         target="_blank"
       >
-         <span class="text-[#ada7a3] hover:text-red-600 font-bold ml-4"> K-Team </span>
+         <span class="text-[#ffffff] hover:text-red-400 font-bold ml-4"> K-Team </span>
       </a>
     </nav>
   </header>

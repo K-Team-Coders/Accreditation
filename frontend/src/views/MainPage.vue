@@ -1,8 +1,8 @@
 <template>
-  <body class="bg-whitesmoke">
+  <body class="bg-whitesmoke font-rale">
     <Header></Header>
-    <div class="flex">
-      <div class="px-36 pt-10 shadow-lg w-9/12">
+    <div class="">
+      <div class="px-36 pt-10 shadow-lg">
         <div class="flex justify-center">
           <FormsFile />
         </div>
@@ -26,12 +26,12 @@
             title="Группа продукции: "
           />
         </div>
-        <div class="flex justify-center mb-6">
+        <div class="flex justify-center pb-6">
           <DownloadButtonGost />
         </div>
-      </div>
-      <div class="w-3/12 flex">
-        <RightAside />
+        <div class="flex flex-col">
+          <RightAside />
+        </div>
       </div>
     </div>
     <Footer></Footer>
