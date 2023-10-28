@@ -7,6 +7,7 @@ __pycache__/
 
 # C extensions
 *.so
+*.docx
 
 # Distribution / packaging
 .idea
@@ -39,6 +40,8 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+
+dataset.csv
 
 # Unit test / coverage reports
 htmlcov/
