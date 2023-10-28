@@ -5,90 +5,40 @@
     tabindex="-1"
     @keydown.esc="close"
   >
-    <div class="bg-gray-200 w-[95%] mx-auto xl:my-2 ">
-      <div class="flex justify-end p-2">
+    <div class="bg-gray-200 w-[95%] mx-auto xl:my-2">
+      <div class="flex justify-end m-2">
         <ModalWindowButtonClose @click="close" />
       </div>
       <div class="">
+        <div class="flex gap-2 justify-center">
+          <p class="text-center pb-4 font-bold text-2xl">ID</p>
+          <p class="text-center pb-4 font-bold text-2xl">Название группы</p>
+        </div>
         <div
           class="flex transition justify-between h-full py-1 pb-4 px-4 ml-2 mr-4 leading-normal"
         >
           <p
-            class="mb-1 pb-2 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-gray-800 border-r-2 border-black"
+            class="mb-1 pb-2 px-1 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-gray-800 border-r-2 border-black"
           >
             Пользовательское оборудование:
             <span class="font-normal text-base">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Cupiditate magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium. Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
-              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-              magni, mollitia iure ullam, corporis adipisci quibusdam
-              repellendus aspernatur commodi consequuntur id labore nostrum
-              nulla eligendi temporibus neque doloribus ad praesentium.
+              <li class="" v-for="(item, index) in 12" :key="index">
+                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
+                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
+                утром надо сделать
+              </li>
             </span>
           </p>
           <p
-            class="mb-1 pl-3 text-2xl py-2 w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
+            class="mb-1 pl-3 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
           >
             Оборудование по стандартам ГОСТ:
-            <span class="font-normal text-lg">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad,
-              aperiam. Unde est ab assumenda consequuntur dolor ex eos nulla,
-              voluptas asperiores ducimus nemo magnam earum inventore modi
-              molestiae non recusandae!</span
+            <span class="font-normal text-base">
+              <li class="" v-for="(item, index) in 12" :key="index">
+                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
+                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
+                утром надо сделать
+              </li></span
             >
           </p>
         </div>
