@@ -2,34 +2,68 @@ import os
 import time
 import json
 import docx
-import nltk
+
 import shutil
 import psycopg2
-import numpy as np 
-import pandas as pd
 from pathlib import Path
 from loguru import logger  
+from dotenv import load_dotenv
+
+import pandas as pd
+import numpy as np 
+
+import nltk
+from nltk.corpus import stopwords
 from pymystem3 import Mystem
 from string import punctuation
-from dotenv import load_dotenv
-from nltk.corpus import stopwords
-from sklearn.metrics.pairwise import linear_kernel
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, File, Request, UploadFile, Response
 from fastapi.responses import JSONResponse
-from sklearn.feature_extraction.text import TfidfVectorizer
+
+from sklearn.metrics.pairwise import linear_kernel
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import linear_kernel,cosine_similarity
 
 nltk.download('stopwords')
 
+standars_info_path = Path().cwd().joinpath('gosts').joinpath('standarts.csv')
+standars_info = pd.read_csv(standars_info_path)
+
+# Файл для сопоставления ГОСТОВ и Групп\Подгрупп продукции
 gost_compare = 0
 gost_compare_path = Path().cwd().joinpath("gosts").joinpath("gosts_compare.json")
-with open(gost_compare, 'rb') as f:
+with open(gost_compare_path, 'rb') as f:
     gost_compare = json.load(f)
+gost_compare = gost_compare["data"]
 
-our_data=pd.read_csv(Path.cwd().joinpath("data_classes.csv"))
+our_data=pd.read_csv(Path.cwd().joinpath("data_classes.csv"), encoding="utf-8", delimiter='"')
 mystem = Mystem() 
 russian_stopwords = stopwords.words("russian")
 nltk.download("stopwords")
+
+def compute_similarity_precentages(sentences1, sentences2):
+    all_sentences = sentences1 + sentences2
+    tfidf_vectorizer = CountVectorizer(ngram_range=(1, 2))
+    tfidf_matrix = tfidf_vectorizer.fit_transform(all_sentences)
+    tfidf_matrix_sentences1 = tfidf_matrix[:len(sentences1)]
+    tfidf_matrix_sentences2 = tfidf_matrix[len(sentences1):]
+    similarity_matrix = cosine_similarity(tfidf_matrix_sentences1, tfidf_matrix_sentences2)
+    
+    similarity_percentages = [np.round(similarity * 100, 2) for similarity in similarity_matrix]
+
+    return similarity_percentages 
+
+def calculate_similarity_score(list1, list2):
+    tfidf_vectorizer = CountVectorizer(ngram_range=(1, 2))
+
+    tfidf_matrix_input = tfidf_vectorizer.fit_transform(list1)
+    tfidf_matrix_target = tfidf_vectorizer.transform(list2)
+
+    cosine_similarities = linear_kernel(tfidf_matrix_target, tfidf_matrix_input)
+
+    return(np.mean(cosine_similarities))
+
 
 def preprocess_text(text):
     tokens = mystem.lemmatize(text.lower())
@@ -61,10 +95,10 @@ def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
         target_str = target_strings[i]
         similarity = cosine_similarities[i, j]
         list_values[input_str]=similarity
-        logger.debug(f"Целевая строка: {target_str}")
-        logger.debug(f"Наиболее подходящая строка: {input_str}")
-        logger.debug(f"Сходство (TF-IDF): {similarity}")
-        logger.debug("---------")
+        # logger.debug(f"Целевая строка: {target_str}")
+        # logger.debug(f"Наиболее подходящая строка: {input_str}")
+        # logger.debug(f"Сходство (TF-IDF): {similarity}")
+        # logger.debug("---------")
     return set(list_values)
 
 PRODUCTION = False
@@ -167,18 +201,86 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
 
     with open(path_to_save, "wb") as dest_file:
         shutil.copyfileobj(file.file, dest_file)
+    
+    cur.execute("SELECT * FROM gosts;")
+    data = cur.fetchall()
 
-    logger.debug(gost_compare)
+    total_gost_data = []
+    for index, subdata in enumerate(data):
+        # logger.debug(subdata[0]) # id
+        # logger.debug(subdata[1]) # name
+        # logger.debug(subdata[2]) # equip
+
+        total_gost_data.append({
+            "name" : subdata[1],
+            "equip": subdata[2]
+        })
+
     # Open via pandas
-    # df = pd.read_csv(path_to_save)
-    # for row in df.iterrows():
-    #     index = row[1][0] # index
-    #     gost = row[1][1] # GOSTS
-    #     group = row[1][2] # Group
-    #     name = row[1][3] # Naming
-    #     tnved = row[1][4] # TN VED
-    #     equip = row[1][5] # Apparats
+    df = pd.read_csv(path_to_save)
+    for row in df[:5].iterrows():
+        index = row[1][0] # index
+        gost = row[1][1] # GOSTS
+        group = row[1][2] # Group
+        name = row[1][3] # Naming
+        tnved = row[1][4] # TN VED
+        equip = row[1][5] # Apparats
 
+        uppergroup_on_current_group = []
+
+        # try to find in uppergroups
+        for uppergroup in gost_compare:
+            key = list(uppergroup.keys())[0]
+            values = list(uppergroup.values())[0]
+
+            if group in values:
+                uppergroup_on_current_group.append(key)
+
+        # try to find gost on uppergroups 
+        uppergroup_gosts = [] 
+        for subgroup in uppergroup_on_current_group:
+            subgroup_gosts = standars_info[standars_info["Группа продукции"] == subgroup]["Обозначение и наименование стандарта"].to_list()
+            uppergroup_gosts.extend(subgroup_gosts)
+        uppergroup_gosts = list(set(uppergroup_gosts))
+
+        # check with our table && compare search result to validate equipment
+        find_gosts = []
+        find_equipment = []
+
+        # if find groups
+        if uppergroup_gosts:
+            for subdata in total_gost_data:
+                if subdata["name"].replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') in [x.replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') for x in uppergroup_gosts]:
+                    find_gosts.append(subdata["name"].replace('\xa0', ' '))
+                    find_equipment.extend(subdata["equip"].split(';;'))
+        
+        # Метрики !
+
+        # Сумма по элементам
+        # Обородувание из ГОСТА -- list(prediction)
+        # Оборудование из Датасета -- [item for item in item['Техническое оборудование'].split(";") ]
+        # Вернет лист эталонных с пользовательскими чем больше, тем чаще повторяется
+
+        similarity_percentages = compute_similarity_precentages(find_equipment, equip.split(';'))
+        similarity_percentages_len = len(similarity_percentages)
+        similarity_percentages = sum([x / similarity_percentages_len for x in similarity_percentages]) 
+
+        logger.debug(similarity_percentages)
+        
+        # Обший процент
+        
+        similarity_score = calculate_similarity_score(find_equipment, equip.split(';'))
+
+        logger.debug(similarity_score)
+
+        logger.debug(group)
+        logger.debug(name)
+        logger.debug(equip.split(';'))
+        logger.debug(find_equipment)
+
+        logger.warning('\n\n')
+
+    # Прислать ему колонки и проверенный датасет
     return Response(status_code=200)
 
 @app.post("/train")
@@ -207,10 +309,8 @@ async def train_upload_dataset(request: Request, file: UploadFile = File(...)):
         for subresult in prediction:
             result += str(subresult) + " ;; "
 
-        logger.debug(result)
-
         try:
-            cur.execute("INSERT INTO gosts (name, equip) VALUES (%s, %s) ON CONFLICT DO NOTHING;", (path.name, result))
+            cur.execute("INSERT INTO gosts (name, equip) VALUES (%s, %s) ON CONFLICT DO NOTHING;", (str(path.name).replace('.docx', ''), result))
             conn.commit()
             logger.success(f'Added {path.name}')
         except Exception as e:
