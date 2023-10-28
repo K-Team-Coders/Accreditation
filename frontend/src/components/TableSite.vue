@@ -62,22 +62,22 @@
         <tbody class="font-semibold ">
           <tr
             @click="isModalOpen = true"
-            v-for="el in 7"
+            v-for="el in table_data" :key="el.key"
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-red-600"
           >
             <th
               scope="row"
               class="px-6 py-4 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
             >
-              {{ el }}
+              {{ el.id }}
             </th>
-            <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">{{ el + 3 }}</td>
-            <td class="px-6 py-4">{{ el + 9 }}</td>
-            <td class="px-6 py-4">{{ el + 1 }}</td>
-            <td class="px-6 py-4">{{ el + 82 }}</td>
-            <td class="px-6 py-4">{{ el + 8 }}</td>
-            <td class="px-6 py-4">{{ el + 28 }}</td>
+            <td class="px-6 py-4">{{ el.docs }}</td>
+            <td class="px-6 py-4">{{ el.group }}</td>
+            <td class="px-6 py-4">{{ el.name }}</td>
+            <td class="px-6 py-4">{{ el.tnved }}</td>
+            <td class="px-6 py-4">{{ el.equipment_find_len }}</td>
+            <td class="px-6 py-4">{{ el.equipment_user_len }}</td>
+            <td class="px-6 py-4">{{ el.similarity_score }}</td>
           </tr>
         </tbody>
       </table>
