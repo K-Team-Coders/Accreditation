@@ -115,7 +115,7 @@ def preprocess_text(text):
 def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
     tfidf_vectorizer = TfidfVectorizer(ngram_range=(1, 2))
 
-# Преобразуем тексты в матрицу TF-IDF
+    # Преобразуем тексты в матрицу TF-IDF
     tfidf_matrix_input = tfidf_vectorizer.fit_transform(input_strings)
     tfidf_matrix_target = tfidf_vectorizer.transform(target_strings)
 
@@ -125,7 +125,7 @@ def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
     # Находим индексы строк с сходством выше порога
     most_similar_indices = np.argwhere(cosine_similarities > similarity_threshold)
 
-# Выводим только строки, у которых сходство больше 70%
+    # Выводим только строки, у которых сходство больше 70%
     list_values={}
     for i, j in most_similar_indices:
         input_str = input_strings[j]
@@ -380,7 +380,7 @@ async def predictByName(name: str):
     https://disk.yandex.ru/d/kzPozoBRsiJLgQ
     """
     # Example of using the function
-    input_text = "Блузка"
+    input_text = name
     predicted_class = predict_class(input_text)
 
     labels_keys = list(labels.keys())
@@ -437,6 +437,8 @@ async def predictByName(name: str):
 
             find_gosts = list(set(find_gosts))
             find_equipment = list(set(find_equipment))
+
+            logger.success(group)
 
             return JSONResponse(
                 status_code = 200, 
