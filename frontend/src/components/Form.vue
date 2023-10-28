@@ -10,15 +10,9 @@
           @input="text_processing()"
           class="appearance-none bg-transparent border-none w-full text-gray-700 font-semibold mr-3 py-1 px-2 leading-tight focus:outline-none"
           type="text"
-          placeholder="Напишите номер продукта"
+          placeholder="Введите наименование продукта"
           aria-label="Full name"
         />
-        <button
-          class="flex-shrink-0 bg-[#e40046] hover:bg-[#ce134b] border-[#e40046] hover:border-[#ce134b] text-sm border-4 text-whitesmoke font-semibold py-1 px-4 rounded-lg"
-          type="button"
-        >
-          Отправить
-        </button>
       </div>
     </form>
     
@@ -94,15 +88,6 @@ methods: {
         }
       }, 600);
     },
-    submitText() {
-      console.log( {"sentence": this.text})
-      axios
-        .post(`http://${process.env.VUE_APP_USER_IP_WITH_PORT}/processsentence?sentence=${this.text}&id_=${this.$route.params.id}`, { 
-        })
-        .then(() => this.$router.go(`/answer/${this.$route.params.id}`))
-      .catch(function () {
-        console.log("Ошибка в отправке предложения");
-      });
-  }}}
+    }}
 
 </script>
