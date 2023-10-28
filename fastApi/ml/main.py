@@ -17,7 +17,7 @@ from fastapi import FastAPI,File,Request,UploadFile
 
 app=FastAPI()
 
-our_data=pd.read_csv(Path.cwd().joinpath("data").joinpath("data_classes.csv"))
+our_data=pd.read_csv(Path.cwd().joinpath("data_for_ml").joinpath("data_classes.csv"))
 mystem = Mystem() 
 russian_stopwords = stopwords.words("russian")
 nltk.download("stopwords")
@@ -64,7 +64,7 @@ def get_predictions(input_strings,target_strings,similarity_threshold=0.5):
 @app.post("/get_pred")
 async def upload_folder_get_pred(request: Request,  file: UploadFile = File(...)):
     # Get the folder name from the request parameter
-    path_to_save=Path.cwd().joinpath('data').joinpath(file.filename)
+    path_to_save=Path.cwd().joinpath('data_for_ml').joinpath(file.filename)
     with open(path_to_save, "wb") as dest_file:
             shutil.copyfileobj(file.file, dest_file)
 
