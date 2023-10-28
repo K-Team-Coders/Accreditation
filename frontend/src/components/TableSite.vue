@@ -17,19 +17,19 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-72 cursor-pointer hover:text-[#e40046]"
+              class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-[#e40046]"
             >
               Обозначение стандарта
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-72 cursor-pointer hover:text-[#e40046]"
+              class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-[#e40046]"
             >
               Группа продукции
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-72 cursor-pointer hover:text-[#e40046]"
+              class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-[#e40046]"
             >
               Наименование продукции
             </th>
