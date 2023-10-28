@@ -12,7 +12,7 @@
           type="file"
         />
         <p class="mt-2.5 ml-2 text-sm text-gray-500" id="file_input_help">
-          .json
+          .xlsx
         </p>
       </div>
       <div class="flex justify-end pt-2">
@@ -20,7 +20,7 @@
           type="submit"
           class="text-whitesmoke bg-[#e40046] hover:bg-[#ce134b] focus:ring-4 focus:outline-none focus:ring-[#ce134b] font-semibold rounded-lg text-sm w-full sm:w-auto px-4 py-2.5 text-center mt-2"
         >
-          Отправить файл
+          Проверить файл
         </button>
       </div>
     </form>

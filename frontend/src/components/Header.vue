@@ -25,14 +25,14 @@
             stroke-linejoin="round"
           />
         </svg>
-        Product accreditation labotary
+        Лаборатория аккредитации продукции
       </a>
       <a
         class="xl:text-3xl items-center flex text-lg my-auto mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"
         href="https://github.com/K-Team-Coders"
         target="_blank"
       >
-        from <span class="text-[#ada7a3] hover:text-green-600 font-bold ml-4"> K-Team </span>
+         <span class="text-[#ada7a3] hover:text-red-600 font-bold ml-4"> K-Team </span>
       </a>
     </nav>
   </header>
