@@ -30,7 +30,7 @@
             </span>
           </p>
           <p
-            class="mb-1 pl-3 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
+            class="mb-1 pl-6 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
           >
             Оборудование по стандартам ГОСТ:
             <span class="font-normal text-base">
