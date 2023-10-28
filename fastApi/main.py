@@ -267,7 +267,7 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
         
         # Обший процент
         similarity_score = calculate_similarity_score(find_equipment, equip.split(';'))
-                
+        
         result.append(
             {
                 "id": index,
@@ -277,8 +277,8 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
                 "tnved": tnved,
                 "equipment_find_len": len(find_equipment),
                 "equipment_find": find_equipment,
-                "equipment_user": equip,
-                "equipment_user_len": len(equip),
+                "equipment_user": equip.split(';'),
+                "equipment_user_len": len(equip.split(';')),
                 "similarity_score": similarity_score
             }
         )
