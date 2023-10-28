@@ -54,10 +54,7 @@ export default {
     ModalWindowButtonClose,
   },
   props: {
-    id: Number,
-    group: String,
-    user_equip: Array,
-    doc_equip: Array
+    row_data: Array
   },
   methods: {
     close() {

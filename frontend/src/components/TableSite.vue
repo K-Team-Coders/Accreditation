@@ -61,8 +61,8 @@
         </thead>
         <tbody class="font-semibold">
           <tr
-            @click="isModalOpen = true"
-            v-for="el in table_data" :key="el.key"
+            @click="isModalOpen = true, setRowData(el)"
+            v-for="el  in table_data" :key="el.id"
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-red-600"
           >
             <th
@@ -72,7 +72,7 @@
               {{ el.id }}
             </th>
             <td class="px-6 py-4"><ul>
-              <li v-for="(doc, index) in el.docs" :key="index"> {{ doc }} </li>
+              <li v-for="(doc, index)  in el.docs" :key="index"> {{ doc }} </li>
             </ul></td>
             <td class="px-6 py-4">{{ el.group }}</td>
             <td class="px-6 py-4">{{ el.name }}</td>
@@ -85,7 +85,7 @@
       </table>
     </div>
     <div>
-      <ModalWindow :id="el.id" v-if="isModalOpen" @close="isModalOpen = false" />
+      <ModalWindow :row_data="set_data" v-if="isModalOpen" @close="isModalOpen = false" />
     </div>
   </div>
 </template>
@@ -99,12 +99,13 @@ export default {
   data() {
     return {
       isModalOpen: false,
+      set_data: []
     };
   },
   emits: ["close"],
   methods: {
-    alert_fun(el) {
-      alert(el);
+    setRowData(el){
+      this.set_data = el
     },
   },
 };
