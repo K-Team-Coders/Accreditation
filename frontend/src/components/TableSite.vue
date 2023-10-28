@@ -62,48 +62,22 @@
         <tbody class="font-semibold">
           <tr
             @click="isModalOpen = true"
-            v-for="el in 7"
+            v-for="el in table_data" :key="el.key"
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-red-600"
           >
             <th
               scope="row"
               class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
             >
-              {{ el }}
+              {{ el.id }}
             </th>
-            <td class="px-2 py-2">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit
-              natus modi, aliquam placeat, doloribus tenetur voluptatem ex a,
-              officiis tempore dolor doloremque. Exercitationem dolor,
-              dignissimos fugiat optio ipsam ad aliquam.
-            </td>
-            <td class="px-2 py-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa
-              esse at provident impedit in quia magnam, aliquam modi tempora,
-              voluptatem corrupti. Et optio sed ratione ipsa quas odio libero
-              sequi?
-            </td>
-            <td class="px-2 py-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              doloribus similique tenetur eos, odio, repellendus architecto
-              ullam nisi est exercitationem quis repudiandae. Suscipit ex et
-              expedita, vero iusto rerum laboriosam.Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Impedit doloribus similique tenetur
-              eos, odio, repellendus architecto ullam nisi est exercitationem
-              quis repudiandae. Suscipit ex et expedita, vero iusto rerum
-              laboriosam.
-            </td>
-            <td class="px-2 py-2">127367612376 12376128361283</td>
-            <td class="px-2 py-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              doloribus similique tenetur eos, odio, repellendus architecto
-              ullam nisi est exercitationem quis repudiandae. Suscipit ex et
-            </td>
-            <td class="px-2 py-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-              doloribus similique tenetur eos, odio, repellendus architecto
-            </td>
-            <td class="px-2 py-2">4123</td>
+            <td class="px-2 py-2">{{ el.docs }}</td>
+            <td class="px-2 py-2">{{ el.group }}</td>
+            <td class="px-2 py-2">{{ el.name }}</td>
+            <td class="px-2 py-2">{{ el.tnved }}</td>
+            <td class="px-2 py-2">{{ el.equipment_user_len }}</td>
+            <td class="px-2 py-2">{{ el.equipment_find_len }}</td>
+            <td class="px-2 py-2">{{ el.similarity_score }}</td>
           </tr>
         </tbody>
       </table>

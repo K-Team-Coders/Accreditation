@@ -22,7 +22,7 @@ from fastapi import FastAPI, File, Request, UploadFile, Response
 from fastapi.responses import JSONResponse
 
 from sklearn.metrics.pairwise import linear_kernel
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel,cosine_similarity
 
 nltk.download('stopwords')
@@ -63,7 +63,6 @@ def calculate_similarity_score(list1, list2):
     cosine_similarities = linear_kernel(tfidf_matrix_target, tfidf_matrix_input)
 
     return(np.mean(cosine_similarities))
-
 
 def preprocess_text(text):
     tokens = mystem.lemmatize(text.lower())
@@ -216,6 +215,8 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
             "equip": subdata[2]
         })
 
+    result = []
+
     # Open via pandas
     df = pd.read_csv(path_to_save)
     for row in df[:5].iterrows():
@@ -260,28 +261,29 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
         # Обородувание из ГОСТА -- list(prediction)
         # Оборудование из Датасета -- [item for item in item['Техническое оборудование'].split(";") ]
         # Вернет лист эталонных с пользовательскими чем больше, тем чаще повторяется
-
         similarity_percentages = compute_similarity_precentages(find_equipment, equip.split(';'))
         similarity_percentages_len = len(similarity_percentages)
         similarity_percentages = sum([x / similarity_percentages_len for x in similarity_percentages]) 
-
-        logger.debug(similarity_percentages)
         
         # Обший процент
-        
         similarity_score = calculate_similarity_score(find_equipment, equip.split(';'))
-
-        logger.debug(similarity_score)
-
-        logger.debug(group)
-        logger.debug(name)
-        logger.debug(equip.split(';'))
-        logger.debug(find_equipment)
-
-        logger.warning('\n\n')
-
+                
+        result.append(
+            {
+                "id": index,
+                "docs": find_gosts,
+                "group": group,
+                "name": name,
+                "tnved": tnved,
+                "equipment_find_len": len(find_equipment),
+                "equipment_find": find_equipment,
+                "equipment_user": equip,
+                "equipment_user_len": len(equip),
+                "similarity_score": similarity_score
+            }
+        )
     # Прислать ему колонки и проверенный датасет
-    return Response(status_code=200)
+    return JSONResponse(status_code=200, content={"data": result})
 
 @app.post("/train")
 async def train_upload_dataset(request: Request, file: UploadFile = File(...)):
