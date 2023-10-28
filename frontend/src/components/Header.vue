@@ -25,7 +25,7 @@
             stroke-linejoin="round"
           />
         </svg>
-        Лаборатория аккредитации продукции
+        Лаборатория аккредитации
       </a>
       <a
         class="xl:text-3xl items-center flex text-lg my-auto mr-8 font-semibold tracking-widest text-whitesmoke hover:text-gray-300 cursor-pointer"

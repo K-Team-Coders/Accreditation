@@ -2,14 +2,17 @@
   <body class="bg-whitesmoke font-rale">
     <Header></Header>
     <div class="">
-      <div class="px-36 pt-10 shadow-lg">
-        <div class="flex justify-center">
+      <div class="px-36 pt-4 shadow-lg">
+        <div>
+          <LogoTurik />
+        </div>
+        <div class="flex justify-center pt-5">
           <FormsFile />
         </div>
-        <div class="mt-4">
+        <div class="pt-5 pb-16">
           <TableSite />
         </div>
-        <div class="mt-16 flex justify-center">
+        <div class="pt-10 flex justify-center border-t-2 border-[#e40046]">
           <Form />
         </div>
         <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
@@ -26,10 +29,10 @@
             title="Группа продукции: "
           />
         </div>
-        <div class="flex justify-center pb-6">
+        <div class="flex justify-center pb-10">
           <DownloadButtonGost />
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col border-t-2 border-[#e40046] pt-4">
           <RightAside />
         </div>
       </div>
@@ -48,6 +51,7 @@ import DownloadButtonGost from "@/components/DownloadButtonGost.vue";
 import TableSite from "@/components/TableSite.vue";
 import { mapActions, mapGetters } from "vuex";
 import RightAside from "@/components/RightAside.vue";
+import LogoTurik from "@/components/LogoTurik.vue";
 export default {
   components: {
     Header,
@@ -58,6 +62,7 @@ export default {
     DownloadButtonGost,
     TableSite,
     RightAside,
+    LogoTurik,
   },
   data() {
     return {
