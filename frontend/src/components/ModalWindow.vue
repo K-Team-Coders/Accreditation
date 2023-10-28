@@ -5,82 +5,42 @@
     tabindex="-1"
     @keydown.esc="close"
   >
-    <div class="bg-gray-200 max-w-xl mx-auto xl:my-2">
-      <div class="absolute 2xl:right-[41.5rem] p-2">
+    <div class="bg-gray-200 w-[95%] mx-auto xl:my-2">
+      <div class="flex justify-end m-2">
         <ModalWindowButtonClose @click="close" />
       </div>
       <div class="">
-        <img
-          class="shadow-2xl flex justify-center items-center mx-auto w-full"
-          :src="uav_img"
-          alt=""
-        />
+        <div class="flex gap-2 justify-center">
+          <p class="text-center pb-4 font-bold text-2xl">ID</p>
+          <p class="text-center pb-4 font-bold text-2xl">Название группы</p>
+        </div>
         <div
-          class="flex transition flex-col justify-between py-2 pb-4 px-4 ml-2 mr-4 leading-normal"
+          class="flex transition justify-between h-full py-1 pb-4 px-4 ml-2 mr-4 leading-normal"
         >
           <p
-            class="text-2xl my-2 font-monster font-bold tracking-tight text-gray-800"
+            class="mb-1 pb-2 px-1 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-gray-800 border-r-2 border-black"
           >
-            {{ uav_name }}
+            Пользовательское оборудование:
+            <span class="font-normal text-base">
+              <li class="" v-for="(item, index) in 12" :key="index">
+                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
+                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
+                утром надо сделать
+              </li>
+            </span>
           </p>
           <p
-            class="mb-1 text-xl font-monster text-gray-800 border-b-2 border-black"
+            class="mb-1 pl-6 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
           >
-            Страна: <span class="font-bold"> {{ uav_country }} </span>
+            Оборудование по стандартам ГОСТ:
+            <span class="font-normal text-base">
+              <li class="" v-for="(item, index) in 12" :key="index">
+                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
+                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
+                утром надо сделать
+              </li></span
+            >
           </p>
-          <p
-            class="mb-1 text-lg font-monster font-normal text-black border-b-2 border-black"
-          >
-            Компания: <span class="font-bold"> {{ uav_company }}</span>
-          </p>
-          <p
-            class="mb-1 text-lg font-normal font-monster text-black border-b-2 border-black"
-          >
-            Дальность, км:
-            <span class="font-bold"> {{ uav_range / 1000 }} </span>
-          </p>
-          <p
-            class="mb-1 text-lg font-normal text-black font-monster border-b-2 border-black"
-          >
-            Нагрузка, кг: <span class="font-bold">{{ uav_payload }}</span>
-          </p>
-          <p
-            class="mb-1 text-lg font-normal text-black border-b-2 font-monster border-black"
-          >
-            Макс.скорость, км/ч:
-            <span class="font-bold"> {{ uav_max_speed }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Время работы, ч: <span class="font-bold"> {{ uav_endurance }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Платформа: <span class="font-bold"> {{ uav_platform }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Максимальная высота, м: <span class="font-bold"> {{ uav_altitude }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Взлетная масса, кг: <span class="font-bold"> {{ uav_mass }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Ширина, м: <span class="font-bold"> {{ uav_width }}</span>
-          </p>
-          <p
-            class="text-lg font-normal text-black border-b-2 border-black font-monster"
-          >
-            Длина, м: <span class="font-bold"> {{ uav_length }}</span>
-          </p>
-          
         </div>
       </div>
     </div>
@@ -102,20 +62,5 @@ export default {
     this.$el.focus();
   },
   emits: ["close"],
-  props: {
-    uav_img: String,
-    uav_name: String,
-    uav_country: String,
-    uav_company: String,
-    uav_endurance: Number,
-    uav_range: Number,
-    uav_payload: Number,
-    uav_max_speed: Number,
-    uav_platform: String,
-    uav_altitude:String,
-    uav_mass:Number,
-    uav_width:Number,
-    uav_length:Number
-  },
 };
 </script>

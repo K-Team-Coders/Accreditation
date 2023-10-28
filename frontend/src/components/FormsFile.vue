@@ -31,7 +31,7 @@
     </div>
   </div>
   <div class="pt-5 pb-16 overflow-x-auto">
-    <TableSite />
+    <TableSite :table_data="table_data"/>
   </div>
   </div>
 </template>
@@ -47,8 +47,7 @@ export default {
     return {
       is_Error: false,
       files: "",
-      text: "",
-      isTyping: false,
+      table_data : [],
       is_Loading: false,
       colors: ["#4487BE", "#FF7E00", "#222"],
     };
@@ -62,10 +61,10 @@ export default {
         let file = this.files[i];
         formData.append("file", file);
       }
-      console.log(this.IP);
+    
       axios
         .post(
-          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/check_dataset/`,
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/check_dataset`,
           formData,
           {
             headers: {
@@ -73,9 +72,8 @@ export default {
             },
           }
         )
-        .then(function () {
-          console.log("SUCCESS!!");
-        })
+        .then(response => (this.table_data = response.data.data,
+    console.log(this.table_data)))
         .catch(function (response) {
           console.log("FAILURE!!");
           if (response.statusCode == 400) {
@@ -83,7 +81,7 @@ export default {
           }
         })
         .finally(function () {
-          is_Loading = false;
+          
         });
     },
     handleFilesUpload() {
