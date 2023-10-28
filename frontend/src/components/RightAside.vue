@@ -1,6 +1,6 @@
 <template>
   <div class="py-3">
-    <form class="">
+    <form class="mb-2">
       <label
         for="default-search"
         class="mb-2 text-sm font-medium text-gray-900 sr-only"
@@ -23,7 +23,7 @@
       </div>
     </form>
     <div
-      class="text-lg h-96 grid grid-cols-3 gap-2 py-4 text-gray-800 font-roboto font-bold text-left overflow-y-auto"
+      class="text-lg h-96 grid grid-cols-3 gap-2 py-4 text-gray-800 font-roboto font-medium text-left overflow-y-auto"
     >
       <div
         v-for="i in 20"
