@@ -1,6 +1,6 @@
 <template>
   <div class="py-3">
-    <form class="">
+    <form class="mb-2">
       <label
         for="default-search"
         class="mb-2 text-sm font-medium text-gray-900 sr-only"
