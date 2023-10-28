@@ -71,19 +71,21 @@
             >
               {{ el.id }}
             </th>
-            <td class="px-6 py-4">{{ el.docs }}</td>
+            <td class="px-6 py-4"><ul>
+              <li v-for="(doc, index) in el.docs" :key="index"> {{ doc }} </li>
+            </ul></td>
             <td class="px-6 py-4">{{ el.group }}</td>
             <td class="px-6 py-4">{{ el.name }}</td>
             <td class="px-6 py-4">{{ el.tnved }}</td>
             <td class="px-6 py-4">{{ el.equipment_user_len }}</td>
             <td class="px-6 py-4">{{ el.equipment_find_len }}</td>
-            <td class="px-6 py-4">{{ el.similarity_score }}</td>
+            <td class="px-6 py-4">{{ Math.round(el.similarity_score*100) }}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div>
-      <ModalWindow v-if="isModalOpen" @close="isModalOpen = false" />
+      <ModalWindow :id="el.id" v-if="isModalOpen" @close="isModalOpen = false" />
     </div>
   </div>
 </template>
