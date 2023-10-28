@@ -71,9 +71,9 @@
             >
               {{ el.id }}
             </th>
-            <td class="px-6 py-4"><ul>
+            <td class="px-6 py-4">
               <li v-for="(doc, index)  in el.docs" :key="index"> {{ doc }} </li>
-            </ul></td>
+            </td>
             <td class="px-6 py-4">{{ el.group }}</td>
             <td class="px-6 py-4">{{ el.name }}</td>
             <td class="px-6 py-4">{{ el.tnved }}</td>

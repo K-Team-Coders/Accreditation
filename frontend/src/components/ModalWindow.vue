@@ -11,8 +11,8 @@
       </div>
       <div class="">
         <div class="flex gap-2 justify-center">
-          <p class="text-center pb-4 font-bold text-2xl">ID: {{ id }}</p>
-          <p class="text-center pb-4 font-bold text-2xl">Название группы</p>
+          <p class="text-center pb-4 font-bold text-2xl">ID: {{ row_data.id }}</p>
+          <p class="text-center pb-4 font-bold text-2xl">{{ row_data.group }}</p>
         </div>
         <div
           class="flex transition justify-between h-full py-1 pb-4 px-4 ml-2 mr-4 leading-normal"
@@ -22,10 +22,9 @@
           >
             Пользовательское оборудование:
             <span class="font-normal text-base">
-              <li class="" v-for="(item, index) in 12" :key="index">
-                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
-                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
-                утром надо сделать
+              <li class="" v-for="(user_equip, index) in row_data.equipment_user" :key="index">
+                {{ index+1 }}.
+                {{user_equip}}
               </li>
             </span>
           </p>
@@ -34,10 +33,9 @@
           >
             Оборудование по стандартам ГОСТ:
             <span class="font-normal text-base">
-              <li class="" v-for="(item, index) in 12" :key="index">
-                Я сосу леденец огрымный он такой вкусный я не могу поогите мне я
-                хочу пойти спать в коробку быстрее голова болит ааааа преза еще
-                утром надо сделать
+              <li class=""  v-for="(doc_equip, index) in row_data.equipment_find" :key="index">
+                {{ index+1 }}.
+                {{doc_equip}}
               </li></span
             >
           </p>
