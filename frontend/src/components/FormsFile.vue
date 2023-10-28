@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="flex flex-col justify-center items-center px-4 xl:px-0">
     <div
       class="bg-gray-50 2xl:max-w-4xl xl:max-w-3xl lg:max-w-2xl md:max-w-2xl sm:max-w-xl p-4 w-full px-4 py-3 rounded-lg shadow-md"
@@ -32,6 +33,7 @@
   <div class="pt-5 pb-16 overflow-x-auto">
     <TableSite />
   </div>
+  </div>
 </template>
 
 <script>
@@ -63,7 +65,7 @@ export default {
       console.log(this.IP);
       axios
         .post(
-          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/files/`,
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/check_dataset/`,
           formData,
           {
             headers: {
@@ -73,7 +75,6 @@ export default {
         )
         .then(function () {
           console.log("SUCCESS!!");
-          location.reload();
         })
         .catch(function (response) {
           console.log("FAILURE!!");

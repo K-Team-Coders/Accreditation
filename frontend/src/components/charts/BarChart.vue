@@ -1,5 +1,8 @@
 <template>
-    <Bar :chart-data="chartData" />
+
+    <Bar :chart-data="chartData" 
+    :options="chartOptions"
+    :style="myStyles" />
 </template>
 
 <script>
@@ -11,6 +14,14 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default {
   name: 'BarChart',
   components: { Bar },
+  computed: {
+    myStyles () {
+      return {
+        height: `${10}px`,
+        position: 'relative'
+      }
+    }
+  },
   data() {
     return {
       chartData: {
@@ -22,6 +33,9 @@ export default {
             data: [40, 20, 12]
           }
         ]
+      },
+      chartOptions: {
+        responsive: true
       }   
     }
   }

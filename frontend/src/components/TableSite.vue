@@ -40,7 +40,7 @@
               scope="col"
               class="px-6 py-3 cursor-pointer hover:text-[#e40046]"
             >
-              Техническое оборудование
+              Оборудование пользователя
             </th>
             <th
               scope="col"
@@ -57,27 +57,29 @@
           </tr>
         </thead>
         <tbody class="font-semibold">
-          <tr v-for="el in 4" class="bg-white border-b hover:bg-gray-50">
-            <th
+          <tr  @click="alert_fun(el)" v-for="el in 7" class="bg-white border-b hover:bg-gray-50">
+            <th 
               scope="row"
               class="px-6 py-4 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
             >
               {{ el }}
             </th>
             <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">Ключевого слова нет</td>
-            <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">{{ el }}</td>
-            <td class="px-6 py-4">{{ el }}</td>
+            <td class="px-6 py-4">{{ el + 3}}</td>
+            <td class="px-6 py-4">{{ el  + 9}}</td>
+            <td class="px-6 py-4">{{ el + 1}}</td>
+            <td class="px-6 py-4">{{ el  + 82}}</td>
+            <td class="px-6 py-4">{{ el  + 8}}</td>
+            <td class="px-6 py-4">{{ el + 28}}</td>
           </tr>
+          <tr>Выберите строчку для детального просмотра списков оборудований</tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
 <script>
+
 export default {
   props: {
     table_data: Array,
@@ -85,5 +87,11 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    alert_fun(el){
+
+      alert(el)
+    }
+  }
 };
 </script>
