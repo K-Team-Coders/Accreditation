@@ -5,27 +5,83 @@
     tabindex="-1"
     @keydown.esc="close"
   >
-    <div class="bg-gray-200 max-w-7xl mx-auto xl:my-2">
+    <div class="bg-gray-200 w-[95%] mx-auto xl:my-2 ">
       <div class="flex justify-end p-2">
         <ModalWindowButtonClose @click="close" />
       </div>
       <div class="">
         <div
-          class="flex transition flex-col justify-between py-1 pb-4 px-4 ml-2 mr-4 leading-normal"
+          class="flex transition justify-between h-full py-1 pb-4 px-4 ml-2 mr-4 leading-normal"
         >
           <p
-            class="mb-1 pb-2 text-2xl font-roboto font-bold text-gray-800 border-b-2 border-black"
+            class="mb-1 pb-2 text-2xl w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-gray-800 border-r-2 border-black"
           >
             Пользовательское оборудование:
-            <span class="font-normal text-lg">
+            <span class="font-normal text-base">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Cupiditate magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium. Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
+              repellendus aspernatur commodi consequuntur id labore nostrum
+              nulla eligendi temporibus neque doloribus ad praesentium.Lorem
+              ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
+              magni, mollitia iure ullam, corporis adipisci quibusdam
               repellendus aspernatur commodi consequuntur id labore nostrum
               nulla eligendi temporibus neque doloribus ad praesentium.
             </span>
           </p>
           <p
-            class="mb-1 text-2xl py-2 font-roboto font-bold text-black border-b-2 border-black"
+            class="mb-1 pl-3 text-2xl py-2 w-1/2 h-[700px] overflow-y-scroll font-roboto font-bold text-black"
           >
             Оборудование по стандартам ГОСТ:
             <span class="font-normal text-lg">
