@@ -7,7 +7,7 @@
       class="mx-4 my-4 text-whitesmoke xl:text-xl text-sm font-semibold text-left items-end"
     >
       <span class="text-[#e40046] text-start text-2xl">{{ title }}</span>
-      <span class="text-whitesmoke text-2xl ml-1">{{ text }}</span>
+      <span class="text-whitesmoke text-2xl ml-1 font-roboto">{{ text }}</span>
     </div>
   </div>
 </template>
