@@ -9,28 +9,8 @@
         <div class="flex justify-center pt-5">
           <FormsFile />
         </div>
-        <div class="pt-5 pb-16">
-          <TableSite />
-        </div>
         <div class="pt-10 flex justify-center border-t-2 border-[#e40046]">
           <Form />
-        </div>
-        <div class="grid grid-cols-2 gap-2 mt-10 mb-4">
-          <Cards name="book" text="12367-123" title="ГОСТ: " />
-          <Cards name="code" text="1746293568487" title="ТН ВЕД: " />
-          <Cards
-            name="tech"
-            text="станок некачественный"
-            title="Оборудование: "
-          />
-          <Cards
-            name="list"
-            text="набитый мясом холодильник"
-            title="Группа продукции: "
-          />
-        </div>
-        <div class="flex justify-center pb-10">
-          <DownloadButtonGost />
         </div>
         <div class="flex flex-col border-t-2 border-[#e40046] pt-4">
           <RightAside />

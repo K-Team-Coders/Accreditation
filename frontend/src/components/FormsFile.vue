@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div
     class="bg-gray-50 2xl:max-w-4xl xl:max-w-3xl lg:max-w-2xl md:max-w-2xl sm:max-w-xl max-w-[320px] p-4 w-full px-4 py-3 rounded-lg shadow-md"
   >
@@ -24,5 +25,19 @@
         </button>
       </div>
     </form>
+   
   </div>
+  <div class="pt-5 pb-16">
+          <TableSite />
+        </div>
+      </div>
 </template>
+
+<script>
+import TableSite from './TableSite.vue';
+export default {
+components: {
+  TableSite
+}
+}
+</script>

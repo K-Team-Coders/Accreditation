@@ -29,8 +29,7 @@
         v-for="i in 20"
         class="cursor-pointer shadow-md hover:text-[#e40046] text px-4 py-2 duration-300 bg-gray-300 rounded-lg"
       >
-        ГОСТ 12372 - Я ХОЧУ ЕСТЬ ПРОД ЖРА asdasdasdqwwe asjdhakj gdksab kdags
-        dgaksjd nk dgqwyg sabdjb a jshdbkuygk
+      ГОСТ 126-79 Галоши резиновые клееные. Технические условия
         <p class="text-gray-600 text-right duration-300 hover:underline ">скачать</p>
       </div>
     </div>
