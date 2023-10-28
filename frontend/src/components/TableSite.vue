@@ -75,8 +75,8 @@
             <td class="px-6 py-4">{{ el.group }}</td>
             <td class="px-6 py-4">{{ el.name }}</td>
             <td class="px-6 py-4">{{ el.tnved }}</td>
-            <td class="px-6 py-4">{{ el.equipment_find_len }}</td>
             <td class="px-6 py-4">{{ el.equipment_user_len }}</td>
+            <td class="px-6 py-4">{{ el.equipment_find_len }}</td>
             <td class="px-6 py-4">{{ el.similarity_score }}</td>
           </tr>
         </tbody>
