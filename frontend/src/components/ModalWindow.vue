@@ -11,7 +11,7 @@
       </div>
       <div class="">
         <div class="flex gap-2 justify-center">
-          <p class="text-center pb-4 font-bold text-2xl">ID</p>
+          <p class="text-center pb-4 font-bold text-2xl">ID: {{ id }}</p>
           <p class="text-center pb-4 font-bold text-2xl">Название группы</p>
         </div>
         <div
@@ -52,6 +52,9 @@ import ModalWindowButtonClose from "./ModalWindowButtonClose.vue";
 export default {
   components: {
     ModalWindowButtonClose,
+  },
+  props: {
+    row_data: Array
   },
   methods: {
     close() {
