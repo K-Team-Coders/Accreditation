@@ -75,6 +75,16 @@ def predict_class(input_text):
     predicted_class = clf.predict([vector])
     return predicted_class[0]
 
+# Предстаказание класса по второму методу
+def predict_text(text, model_file):
+    # Загрузить сохраненный пайплайн из файла
+    pipeline = joblib.load(model_file)
+    
+    # Вызвать метод predict на пайплайне для предсказания класса текста
+    predicted_class = pipeline.predict([text])[0]
+    
+    return predicted_class
+
 
 # Функция для метрики обоснованности выбора по каждому из оборудований
 def compute_similarity_precentages(sentences1, sentences2):
@@ -265,6 +275,7 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
             "equip": subdata[2]
         })
 
+    save_df = pd.DataFrame(columns=["id", "Найденные вложенные ГОСТ", "Группа продукции", "Наименование продукции", "Коды ОКПД 2 / ТН ВЭД ЕАЭС", "Заявленное ТО", "Эталонное ТО (из ГОСТ)", "Оценка схожести"])
     result = []
 
     # Open via pandas
@@ -313,6 +324,25 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
         except Exception as e:
             logger.error(e)
 
+        # save_df = pd.concat(
+        #     [
+        #         save_df, 
+        #         pd.DataFrame.from_dict(
+        #             list(
+        #                     {
+        #                         "id": index,
+        #                         "docs": find_gosts,
+        #                         "group": group,
+        #                         "name": name,
+        #                         "tnved": tnved,
+        #                         "equipment_user": equip.split(';'),
+        #                         "equipment_find": find_equipment,
+        #                         "similarity_score": similarity_score
+        #                     }.items()
+        #                 ), columns=["id", "docs", "group", "name", "tnved", "equipment_user", "equipment_find", "similarity_score"])], ignore_index=True)
+
+        save_df.loc[len(save_df)] = [index, find_gosts, group, name, tnved, equip.split(';'), find_equipment, similarity_score]
+
         result.append(
             {
                 "id": index,
@@ -327,6 +357,9 @@ async def upload_dataset(request: Request, file: UploadFile = File(...)):
                 "similarity_score": similarity_score
             }
         )
+
+    save_df.to_csv('result.csv')
+    
     # Прислать ему колонки и проверенный датасет
     return JSONResponse(status_code=200, content={"data": result})
 
@@ -379,75 +412,78 @@ async def predictByName(name: str):
 
     https://disk.yandex.ru/d/kzPozoBRsiJLgQ
     """
+
     # Example of using the function
-    input_text = name
-    predicted_class = predict_class(input_text)
+    if name:
+        input_text = name
+        # predicted_class = predict_class(input_text)
+        predicted_class = predict_text(name, Path.cwd().joinpath("names").joinpath("models").joinpath("text_classification_pipeline.pkl"))
 
-    labels_keys = list(labels.keys())
-    labels_values = list(labels.values()) 
 
-    group = None
-    for index in range(len(labels_values)):
-        if labels_values[index] == predicted_class:
-            group = labels_keys[index]
+        labels_keys = list(labels.keys())
+        labels_values = list(labels.values()) 
 
-                
-            cur.execute("SELECT * FROM gosts;")
-            data = cur.fetchall()
+        group = None
+        for index in range(len(labels_values)):
+            if labels_values[index] == predicted_class:
+                group = labels_keys[index]
+                    
+                cur.execute("SELECT * FROM gosts;")
+                data = cur.fetchall()
 
-            total_gost_data = []
-            for index, subdata in enumerate(data):
-                # logger.debug(subdata[0]) # id
-                # logger.debug(subdata[1]) # name
-                # logger.debug(subdata[2]) # equip
+                total_gost_data = []
+                for index, subdata in enumerate(data):
+                    # logger.debug(subdata[0]) # id
+                    # logger.debug(subdata[1]) # name
+                    # logger.debug(subdata[2]) # equip
 
-                total_gost_data.append({
-                    "name" : subdata[1],
-                    "equip": subdata[2]
-                })
+                    total_gost_data.append({
+                        "name" : subdata[1],
+                        "equip": subdata[2]
+                    })
 
-            # Решение как в первой подзадаче
-            uppergroup_on_current_group = []
+                # Решение как в первой подзадаче
+                uppergroup_on_current_group = []
 
-            # try to find in uppergroups
-            for uppergroup in gost_compare:
-                key = list(uppergroup.keys())[0]
-                values = list(uppergroup.values())[0]
+                # try to find in uppergroups
+                for uppergroup in gost_compare:
+                    key = list(uppergroup.keys())[0]
+                    values = list(uppergroup.values())[0]
 
-                if group in values:
-                    uppergroup_on_current_group.append(key)
+                    if group in values:
+                        uppergroup_on_current_group.append(key)
 
-            # try to find gost on uppergroups 
-            uppergroup_gosts = [] 
-            for subgroup in uppergroup_on_current_group:
-                subgroup_gosts = standars_info[standars_info["Группа продукции"] == subgroup]["Обозначение и наименование стандарта"].to_list()
-                uppergroup_gosts.extend(subgroup_gosts)
-            uppergroup_gosts = list(set(uppergroup_gosts))
+                # try to find gost on uppergroups 
+                uppergroup_gosts = [] 
+                for subgroup in uppergroup_on_current_group:
+                    subgroup_gosts = standars_info[standars_info["Группа продукции"] == subgroup]["Обозначение и наименование стандарта"].to_list()
+                    uppergroup_gosts.extend(subgroup_gosts)
+                uppergroup_gosts = list(set(uppergroup_gosts))
 
-            # check with our table && compare search result to validate equipment
-            find_gosts = []
-            find_equipment = []
+                # check with our table && compare search result to validate equipment
+                find_gosts = []
+                find_equipment = []
 
-            # if find groups
-            if uppergroup_gosts:
-                for subdata in total_gost_data:
-                    if subdata["name"].replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') in [x.replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') for x in uppergroup_gosts]:
-                        find_gosts.append(subdata["name"].replace('\xa0', ' '))
-                        find_equipment.extend(subdata["equip"].split(';;'))
+                # if find groups
+                if uppergroup_gosts:
+                    for subdata in total_gost_data:
+                        if subdata["name"].replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') in [x.replace(' ', '').replace('"', '').replace("'", '').replace('\xa0', '') for x in uppergroup_gosts]:
+                            find_gosts.append(subdata["name"].replace('\xa0', ' '))
+                            find_equipment.extend(subdata["equip"].split(';;'))
 
-            find_gosts = list(set(find_gosts))
-            find_equipment = list(set(find_equipment))
+                find_gosts = list(set(find_gosts))
+                find_equipment = list(set(find_equipment))
 
-            logger.success(group)
+                logger.success(group)
 
-            return JSONResponse(
-                status_code = 200, 
-                content = {
-                    "name": name,
-                    "group": group,
-                    "find_gosts": find_gosts,
-                    "find_equipment": find_equipment
-                }
-            )
+                return JSONResponse(
+                    status_code = 200, 
+                    content = {
+                        "name": name,
+                        "group": group,
+                        "find_gosts": find_gosts,
+                        "find_equipment": find_equipment
+                    }
+                )
         
     return Response(status_code=422)
