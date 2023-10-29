@@ -13,9 +13,10 @@ SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
-CREATE TABLE public.tables_list (
-    table_id bigint NOT NULL,
-    table_head_question text NOT NULL
+CREATE TABLE public.gosts (
+    id bigint NOT NULL,
+    name text NOT NULL,
+    equip text NOT NULL
 );
 
-ALTER TABLE public.tables_list OWNER TO myvoice_user;
+ALTER TABLE public.gosts OWNER TO accreditation_user;
