@@ -22,7 +22,7 @@
         </div>
       </form>
     </div>
-    <div class="grid xl:grid-cols-4 lg:grid-cols-4 sm:grid-cols-2 grod-cols-1 gap-2 mt-10 mb-4">
+    <div class="grid xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 grod-cols-1 gap-2 mt-10 mb-4">
       <Cards name="book" :text="pred_data.find_gosts" title="ГОСТ: " />
       <Cards name="tech" :text="pred_data.find_equipment" title="Оборудование: " />
       <Cards name="list" :text="pred_data.group" title="Группа продукции: " />
