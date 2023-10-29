@@ -117,6 +117,7 @@ FastAPI, VueJS, PostgreSQL, Docker (docker-compose), gensim, tensorflow, nltk, s
 ### Детальный просмотр каждой строчки таблицы
 ![Иллюстрация к проекту](Screenshot_7.png) 
 ### Форма поиска оборудования по наименованию продукции
+![Иллюстрация к проекту](Screenshot_8.png) 
 
 ### Anrdroid-приложение
 <p style="text-align:center"><img src="photo_0.jpg" width="250">
