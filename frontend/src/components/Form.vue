@@ -27,9 +27,6 @@
       <Cards name="tech" :text="pred_data.find_equipment" title="Оборудование: " />
       <Cards name="list" :text="pred_data.group" title="Группа продукции: " />
     </div>
-    <div class="flex justify-center pb-10">
-      <DownloadButtonGost />
-    </div>
   </div>
 </template>
 <script>
